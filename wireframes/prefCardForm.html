@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Add a new PrefCard Form</title>
+  </head>
+  <nav>
+    <button type="click">Home</button>
+    <button type="click">Log In</button>
+    <button type="click">Register</button>
+  </nav>
+  <body>
+    <header>
+      <h1>New PrefCard</h1>
+    </header>
+    <form>
+      Surgeon:<br /><input type="text" name="surgeon-name" /> <br />
+      Procedure:<br /><input type="text" name="procedure" /> <br />
+      Position:<br /><input type="text" name="position" /> <br />
+      <select>
+        <option>Glove Size</option>
+        <option>6</option>
+        <option>6.5</option>
+        <option>7</option>
+        <option>7.5</option>
+        <option>8</option>
+        <option>8.5</option>
+      </select>
+      <label
+        >Glove Type:
+        <input type="radio" id="small" name="small" value="small" checked/><label
+          for="small"
+          >Small</label
+        >
+        <input type="radio" id="medium" name="medium" value="medium" /><label
+        for="medium"
+        >Medium</label
+      >
+      <input type="radio" id="large" name="large" value="large" /><label
+      for="large"
+      >Large</label
+    >
+    <br>
+      </label>
+      <label
+        >Dominant Hand:
+        <input type="radio" id="right" name="right" value="right" /><label
+          for="right"
+          >Right</label
+        >
+        <input type="radio" id="left" name="left" value="left" /><label
+        for="left"
+        >Left</label
+      >
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
