@@ -1,0 +1,25 @@
+HOME PAGE
+
+User clicks log in => Redirected to login page
+User clicks register => Redirected to register page
+
+PREFERENCE CARD FORM PAGE
+
+User clicks Home button => Redirected to list of all cards
+User clicks Log Out button => Redirected to Home page
+User clicks Submit button without required fields =>
+    Error message pops up
+User clicks Submit button with all required fields filled out =>
+    Redirected to page listing their new card
+
+ALL CARDS PAGE
+
+User clicks on a card => Redirected to a page displayed that entire PrefCard 
+
+PREFCARD PAGE
+
+User clicks on All Prefcards => Redirected to list
+User clicks Log Out => Redirected to login page
+User clicks Home => Redirected to Home page
+User clicks Edit PrefCard => Redirected to PrefCard Form with previous values already entered
+

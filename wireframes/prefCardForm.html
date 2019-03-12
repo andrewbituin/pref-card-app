@@ -8,8 +8,7 @@
   </head>
   <nav>
     <button type="click">Home</button>
-    <button type="click">Log In</button>
-    <button type="click">Register</button>
+    <button type="click">Log Out</button>
   </nav>
   <body>
     <header>
@@ -17,8 +16,8 @@
     </header>
     <form>
       Surgeon:<br /><input type="text" name="surgeon-name" /> <br />
-      Procedure:<br /><input type="text" name="procedure" /> <br />
-      Position:<br /><input type="text" name="position" /> <br />
+      Procedure:<br /><textarea rows="4" cols="50"></textarea> <br />
+      Position:<br /><textarea rows="4" cols="50"></textarea> <br />
       <select>
         <option>Glove Size</option>
         <option>6</option>
@@ -28,6 +27,8 @@
         <option>8</option>
         <option>8.5</option>
       </select>
+
+      <br>
       <label
         >Glove Type:
         <input type="radio" id="small" name="small" value="small" checked/><label
@@ -44,6 +45,7 @@
     >
     <br>
       </label>
+
       <label
         >Dominant Hand:
         <input type="radio" id="right" name="right" value="right" /><label
@@ -54,6 +56,19 @@
         for="left"
         >Left</label
       >
+      <br>
+      Supplies:<br><textarea rows="4" cols="50"></textarea>
+      <br>
+      Instrumentation:<br><textarea rows="4" cols="50"></textarea>
+      <br>
+      Suture and Usage:<br><textarea rows="4" cols="50"></textarea>
+      <br>
+      Dressings:<br><textarea rows="4" cols="50"></textarea>
+      <br>
+      Skin Prep:<br><textarea rows="4" cols="50"></textarea>
+      <br>
+      Medications:<br><textarea rows="4" cols="50"></textarea>
+      <br>
       <button type="submit">Submit</button>
     </form>
   </body>
