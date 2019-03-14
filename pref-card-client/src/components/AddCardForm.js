@@ -9,6 +9,7 @@ export default class AddCardForm extends React.Component {
     gloveSize: null,
     gloveType: "",
     dominantHand: "",
+    equipment: "",
     supplies: "",
     instrumentation: "",
     sutureAndUsage: "",
@@ -22,9 +23,10 @@ export default class AddCardForm extends React.Component {
     this.setState({ [stateProperty]: e.target.value });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     console.log(this.state);
+    this.props.history.push("/all");
   };
 
   generateForm = () => {
@@ -66,28 +68,54 @@ export default class AddCardForm extends React.Component {
           <option>8.5</option>
         </select>
         <br />
-        <div className="gloveType" onChange={e => this.handleChange(e)}>
-          <label>
-            Glove Type: <s />
-            <label htmlFor="small">Small</label>
-            <input type="radio" id="small" name="gloveType" value="small" />
-            <label htmlFor="medium">Medium</label>
-            <input type="radio" id="medium" name="gloveType" value="medium" />
-            <label htmlFor="large">Large</label>
-            <input type="radio" id="large" name="gloveType" value="large" />
-            <br />
-          </label>
-        </div>
-        <div className="dominantHand" onChange={e => this.handleChange(e)}>
+        <label>
+          Glove Type: <s />
+          <label htmlFor="small">Small</label>
+          <input
+            type="radio"
+            id="small"
+            className="gloveType"
+            name="gloveType"
+            value="small"
+            onChange={e => this.handleChange(e)}
+          />
+          <label htmlFor="medium">Medium</label>
+          <input
+            type="radio"
+            id="medium"
+            className="gloveType"
+            name="gloveType"
+            value="medium"
+            onChange={e => this.handleChange(e)}
+          />
+          <label htmlFor="large">Large</label>
+          <input
+            type="radio"
+            id="large"
+            className="gloveType"
+            name="gloveType"
+            value="large"
+            onChange={e => this.handleChange(e)}
+          />
+          <br />
+        </label>
           <label>
             Dominant Hand: <s />
             <label htmlFor="right">Right</label>
-            <input type="radio" id="right" name="dominantHand" value="right" />
+            <input type="radio" id="right" className="dominantHand" name="dominantHand" value="right" onChange={e => this.handleChange(e)} />
             <label htmlFor="left">Left</label>
-            <input type="radio" id="left" name="dominantHand" value="left" />
+            <input type="radio" id="left" className="dominantHand" name="dominantHand" value="left" onChange={e => this.handleChange(e)} />
             <br />
           </label>
-        </div>
+        Equipment:
+        <br />
+        <textarea
+          rows="4"
+          cols="50"
+          className="equipment"
+          onChange={e => this.handleChange(e)}
+        />
+        <br />
         Supplies:
         <br />
         <textarea
@@ -106,6 +134,24 @@ export default class AddCardForm extends React.Component {
           onChange={e => this.handleChange(e)}
         />
         <br />
+        Suture and usage:
+        <br />
+        <textarea
+          rows="4"
+          cols="50"
+          className="sutureAndUsage"
+          onChange={e => this.handleChange(e)}
+        />
+        <br />
+        Dressings:
+        <br />
+        <textarea
+          rows="4"
+          cols="50"
+          className="dressings"
+          onChange={e => this.handleChange(e)}
+        />
+        <br />
         Skin Prep:
         <br />
         <textarea
@@ -120,7 +166,7 @@ export default class AddCardForm extends React.Component {
         <textarea
           rows="4"
           cols="50"
-          className="medication"
+          className="medications"
           onChange={e => this.handleChange(e)}
         />
         <br />

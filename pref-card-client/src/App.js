@@ -20,7 +20,10 @@ class App extends Component {
           render={(props) => <Register {...props} />} />
         <Route exact path="/card/1" component={CardById} />
         <Route exact path="/all" component={CardsList} />
-        <Route exact path="/create-card" component={AddCardForm} />
+        <Route 
+          exact path="/create-card" 
+          render={(props) => <AddCardForm {...props} />}
+          /> 
       </div>
     );
   }
