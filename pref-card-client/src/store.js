@@ -1,4 +1,4 @@
-export default (store = [
+const store = [
   {
     id: 1,
     users: "",  
@@ -16,4 +16,5 @@ export default (store = [
     surgeon: "Dr. Alyssa Soohoo",
     sutureAndUsage: "Ties: 2-0 Vicryl Reel"
   }
-]);
+];
+export default store;

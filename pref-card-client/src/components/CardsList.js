@@ -1,10 +1,11 @@
 import React from "react";
-import Card from "./Card";
 import { Link } from "react-router-dom";
+import CardsCondensed from './CardsCondensed';
 
 export default class CardsList extends React.Component {
   state = {};
   render() {
+    console.log(this.props)
     return (
       <div>
         <Link to="/create-card">
@@ -13,8 +14,9 @@ export default class CardsList extends React.Component {
         <Link to="/">
         <button type="click">Logout</button>
         </Link>
+        <h1>PrefCards List</h1>
         <ul>
-          <Card />
+          <CardsCondensed store={this.props}/>
         </ul>
       </div>
     );

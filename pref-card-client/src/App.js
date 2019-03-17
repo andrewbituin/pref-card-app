@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import CardById from './components/CardById';
 import CardsList from './components/CardsList';
 import AddCardForm from "./components/AddCardForm";
+import store from './store'
 
 class App extends Component {
   render() {
@@ -18,8 +19,12 @@ class App extends Component {
         <Route 
           exact path="/register" 
           render={(props) => <Register {...props} />} />
-        <Route exact path="/card/1" component={CardById} />
-        <Route exact path="/all" component={CardsList} />
+        <Route
+          exact path="/card/1" 
+          render={(props) => <CardById {...props} {...store} />} />
+        <Route 
+        exact path="/all" 
+        render={(props) => <CardsList {...props} {...store} />} />
         <Route 
           exact path="/create-card" 
           render={(props) => <AddCardForm {...props} />}
