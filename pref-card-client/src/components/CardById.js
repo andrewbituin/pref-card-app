@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function CardById(props) {
   const {
+    id,
     dominantHand,
     dressings,
     equipment,
@@ -18,7 +19,7 @@ export default function CardById(props) {
     sutureAndUsage
   } = props[0];
   const fullCard = (
-    <>
+    <div id={id}>
       <h1>Your PrefCard</h1>
       <h2>Surgeon: {surgeon} </h2>
       <h3>Procedure: {procedure} </h3>
@@ -37,7 +38,7 @@ export default function CardById(props) {
         <p>Skin Prep: {skinPrep} </p>
         <p>Medication: {medications} </p>
       </section>
-    </>
+    </div>
   );
   const allCardsButton = (
       <Link to="/all">

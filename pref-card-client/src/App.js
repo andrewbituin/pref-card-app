@@ -24,7 +24,7 @@ class App extends Component {
           render={(props) => <CardById {...props} {...store} />} />
         <Route 
         exact path="/all" 
-        render={(props) => <CardsList {...props} {...store} />} />
+        render={(props) => <CardsList {...props} store={store} />} />
         <Route 
           exact path="/create-card" 
           render={(props) => <AddCardForm {...props} />}

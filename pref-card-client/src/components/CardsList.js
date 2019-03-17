@@ -5,7 +5,6 @@ import CardsCondensed from './CardsCondensed';
 export default class CardsList extends React.Component {
   state = {};
   render() {
-    console.log(this.props)
     return (
       <div>
         <Link to="/create-card">
@@ -16,7 +15,7 @@ export default class CardsList extends React.Component {
         </Link>
         <h1>PrefCards List</h1>
         <ul>
-          <CardsCondensed store={this.props}/>
+          <CardsCondensed store={this.props.store} props={this.props}/>
         </ul>
       </div>
     );
