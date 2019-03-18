@@ -28,8 +28,8 @@ class App extends Component {
         />
         <Route
           exact
-          path="/card/1"
-          render={props => <CardById {...props} />}
+          path="/card/:id"
+          render={props => <CardById {...props} store={this.state.allCards} />}
         />
         <Route
           exact

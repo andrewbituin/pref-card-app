@@ -6,10 +6,10 @@ export default function CardsCondensed(props) {
   };
   const displayCondensedCards = () => {
       return props.store.map(card => {
-          return <li key={card.id}>
+          return <li key={card.id} id={card.id}>
           <h2>{card.surgeon}</h2>
           <p>{card.procedure}</p>
-          <button type="click" onClick={handleCardClick}>Expand</button>
+          <button type="click" id={card.id} onClick={handleCardClick}>Expand</button>
           </li>
       })
   }

@@ -15,6 +15,11 @@ export default function Home() {
             Register
           </button>
         </Link>
+        <Link to="/all">
+          <button type="click" className="all-cards-button">
+            View PrefCards
+          </button>
+        </Link>
       </nav>
       <main>
         <h1>PrefCards</h1>
