@@ -7,10 +7,10 @@ prefcard_users;
 INSERT INTO prefcard_users
     (user_name, full_name, position, password)
 VALUES
-    ('asoohoo', 'Alyssa Soohoo', 'doctor', 'password'),
-    ('bmoney', 'Bern Money', 'doctor', '1234567'),
-    ('mmilli', 'Metch Milli', 'tech', 'pword1234'),
-    ('pgary', 'Patrick Gary', 'nurse', 'nintendo');
+    ('asoohoo', 'Alyssa Soohoo', 'doctor', '$2a$10$XHXxN1BZXgMsVM2oaQNPyuazwBDh4bikyXTAZjAAmlscREwhWPYCy'),
+    ('bmoney', 'Bern Money', 'doctor', '$2a$10$JEjD5277Z/rlfvunTxaLXuL6CmoJOHuGaaHLQ9Jdo9SNxQUueWeXC'),
+    ('mmilli', 'Metch Milli', 'tech', '$2a$10$V9syYw1dc5tfkQUHyvc9C.Q3WDV.Y0B686owNebxLUXAe5zyvKIp6'),
+    ('pgary', 'Patrick Gary', 'nurse', '$2a$10$8v33x1QkPo3KNf6jIknnve5YSP7b.DNETmpHStjGG4YI9uZgvFu5a');
 INSERT INTO prefcard_cards
     (
     user_id,
