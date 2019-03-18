@@ -53,17 +53,17 @@ export default function CardById(props) {
       <h3>Procedure: {card.procedure} </h3>
       <section>
         <p>Position: {card.position} </p>
-        <p>Glove Size: {card.gloveSize} </p>
-        <p>Glove Type: {card.gloveType} </p>
-        <p>Domninant Hand: {card.dominantHand} </p>
+        <p>Glove Size: {card.glove_size} </p>
+        <p>Glove Type: {card.glove_type} </p>
+        <p>Domninant Hand: {card.dominant_hand} </p>
       </section>
       <section>
         <p>Equipment: {card.equipment} </p>
         <p>Supplies: {card.supplies} </p>
         <p>Instrumentation: {card.instrumentation} </p>
-        <p>Suture and Usage: {card.sutureAndUsage} </p>
+        <p>Suture and Usage: {card.suture_and_usage} </p>
         <p>Dressings: {card.dressings} </p>
-        <p>Skin Prep: {card.skinPrep} </p>
+        <p>Skin Prep: {card.skin_prep} </p>
         <p>Medication: {card.medications} </p>
       </section>
     </div>

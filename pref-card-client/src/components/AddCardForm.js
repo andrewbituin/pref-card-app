@@ -37,6 +37,7 @@ export default class AddCardForm extends React.Component {
         <input
           type="text"
           className="surgeon"
+          name="surgeon"
           onChange={e => this.handleChange(e)}
         />
         <br />
