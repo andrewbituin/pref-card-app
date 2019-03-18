@@ -26,7 +26,7 @@ export default class AddCardForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log(this.state);
-    this.props.history.push("/all");
+    this.props.history.push("/card/1");
   };
 
   generateForm = () => {
