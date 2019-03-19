@@ -79,5 +79,27 @@ cardsRouter
         })
 
 });
+cardsRouter
+    // Best way to patch? How do I patch individual properties in the db?
+    .route('/:id')
+    .patch(requireAuth, jsonBodyParser, (req, res, next) => {
+        const {
+            id,
+            surgeon,
+            procedure,
+            position,
+            glove_size,
+            glove_type,
+            dominant_hand,
+            equipment,
+            supplies,
+            instrumentation,
+            suture_and_usage,
+            dressings,
+            skin_prep,
+            medications,
+            user_id
+          } = req.body;
+    })
 
 module.exports = cardsRouter;

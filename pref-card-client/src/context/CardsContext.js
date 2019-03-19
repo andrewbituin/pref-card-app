@@ -5,7 +5,7 @@ const CardsContext = React.createContext({
     error: null
 })
 
-export default CardsContext
+export default CardsContext 
 
 export class CardsContextProvider extends React.Component {
     state = {
@@ -25,7 +25,10 @@ export class CardsContextProvider extends React.Component {
     render() {
         const value = {
             cardsList: this.state.cardsList,
-            error: this.state.error
+            error: this.state.error,
+            setCardsList: this.setCardsList,
+            setError: this.setError,
+            clearError: this.clearError
         }
         return (
             <CardsContext.Provider value={value}>

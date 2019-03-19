@@ -1,10 +1,13 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import AuthApiService from "../services/auth-api-service";
+import TokenService from "../services/token-service";
 
 export default class Login extends React.Component {
   state = {
     userName: "",
-    password: ""
+    password: "",
+    error: null
   };
   handleLoginChange = e => {
     const stateProperty = e.target.className;
@@ -12,8 +15,17 @@ export default class Login extends React.Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.userName, this.state.password);
-    this.props.history.push('/all')
+    AuthApiService.postLogin({
+      user_name: this.state.userName,
+      password: this.state.password
+    })
+      .then(res => {
+        TokenService.saveAuthToken(res.authToken);
+        this.props.history.push("/all");
+      })
+      .catch(res => {
+        this.setState({ error: res.error });
+      });
   };
   render() {
     return (
@@ -33,14 +45,11 @@ export default class Login extends React.Component {
             onChange={e => this.handleLoginChange(e)}
           />
           <br />
-          <button
-            type="submit"
-            className="login-submit-button"
-          >
+          <button type="submit" className="login-submit-button">
             Submit
           </button>
           <Link to="/">
-          <button type="click">Cancel</button>
+            <button type="click">Cancel</button>
           </Link>
         </form>
       </div>
