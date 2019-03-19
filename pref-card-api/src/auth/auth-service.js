@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const config = require('../src/config');
+const config = require('../config');
 
 const AuthService = {
   parseBasicToken(bearerToken) {

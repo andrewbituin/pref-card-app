@@ -6,7 +6,8 @@ import Register from "./components/Register";
 import CardById from "./components/CardById";
 import CardsList from "./components/CardsList";
 import AddCardForm from "./components/AddCardForm";
-import ApiService from './services/api-service';
+import ApiService from "./services/api-service";
+import CardsContext from "./context/CardsContext";
 
 class App extends Component {
   state = {
@@ -14,34 +15,39 @@ class App extends Component {
   };
   componentDidMount() {
     ApiService.getAllCards().then(data => this.setState({ allCards: data }));
-    
   }
   render() {
     return (
-      <div>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" render={props => <Login {...props} />} />
-        <Route
-          exact
-          path="/register"
-          render={props => <Register {...props} />}
-        />
-        <Route
-          exact
-          path="/card/:id"
-          render={props => <CardById {...props} store={this.state.allCards} />}
-        />
-        <Route
-          exact
-          path="/all"
-          render={props => <CardsList {...props} store={this.state.allCards}/>}
-        />
-        <Route
-          exact
-          path="/create-card"
-          render={props => <AddCardForm {...props} />}
-        />
-      </div>
+      <CardsContext.Provider>
+        <div>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" render={props => <Login {...props} />} />
+          <Route
+            exact
+            path="/register"
+            render={props => <Register {...props} />}
+          />
+          <Route
+            exact
+            path="/card/:id"
+            render={props => (
+              <CardById {...props} store={this.state.allCards} />
+            )}
+          />
+          <Route
+            exact
+            path="/all"
+            render={props => (
+              <CardsList {...props} store={this.state.allCards} />
+            )}
+          />
+          <Route
+            exact
+            path="/create-card"
+            render={props => <AddCardForm {...props} />}
+          />
+        </div>
+      </CardsContext.Provider>
     );
   }
 }

@@ -1,10 +1,12 @@
 import React from "react";
+import CardsContext from "../context/CardsContext";
 
 export default function CardsCondensed(props) {
   const handleCardClick = e => {
     props.history.push(`/card/${e.target.getAttribute("id")}`);
   };
   const displayCondensedCards = () => {
+    console.log(this.context)
       return props.store.map(card => {
           return <li key={card.id} id={card.id}>
           <h2>{card.surgeon}</h2>
@@ -13,5 +15,10 @@ export default function CardsCondensed(props) {
           </li>
       })
   }
-  return <ul>{displayCondensedCards()}</ul>;
+  return (
+    <CardsContext.Consumer>
+  <ul>
+    {displayCondensedCards()}
+  </ul>
+  </CardsContext.Consumer>);
 }

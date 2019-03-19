@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import CardsCondensed from "./CardsCondensed";
+import CardsCondensedList from "./CardsCondensedList";
 
 export default class CardsList extends React.Component {
 
@@ -12,7 +12,7 @@ export default class CardsList extends React.Component {
         </Link>
         <h1>PrefCards List</h1>
         <ul>
-          <CardsCondensed {...this.props}/>
+          <CardsCondensedList {...this.props}/>
         </ul>
       </div>
     );

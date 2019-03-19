@@ -17,15 +17,15 @@ INSERT INTO prefcard_cards
     surgeon ,
     procedure ,
     position ,
-    gloveSize ,
-    gloveType ,
-    dominantHand ,
+    glove_size ,
+    glove_type ,
+    dominant_hand ,
     equipment ,
     supplies ,
     instrumentation ,
-    sutureAndUsage ,
+    suture_and_usage ,
     dressings ,
-    skinPrep ,
+    skin_prep ,
     medications
     )
 VALUES
@@ -53,12 +53,12 @@ VALUES
         6.5,
         'small',
         'left',
-        'Electrosurgical unit with dispersive electrode',
+        'Suction Apparatus',
         'Craniotomy pack',
-        'Minor instrumentation set',
+        'Basic pack',
         'Ties: 2-0 Vicryl Reel',
         'Triple antibiotic ointment',
-        'Shave if necessary',
-        'Bupivacaine'
+        'Betadine - 5 min',
+        'Control syringe'
     );
 COMMIT;
