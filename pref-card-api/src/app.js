@@ -8,6 +8,7 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config')
 const cardsRouter = require('./cards/cards-router')
 const authRouter = require('./auth/auth-router')
+const usersRouter = require('./users/users-router')
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cors());
 
 app.use('/api', cardsRouter);
 app.use('/api/auth', authRouter);
+
 
 app.use(function errorHandler(error, req, res, next) {
   let response;

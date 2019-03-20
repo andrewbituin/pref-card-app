@@ -20,6 +20,9 @@ const ApiService = {
     }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
+  },
+  getUserId(surgeon){
+    return fetch(`${config.API_ENDPOINT}/users`)
   }
 };
 export default ApiService;

@@ -9,7 +9,6 @@ cardsRouter
   .route("/all")
   // .all(requireAuth)
   .get((req, res, next) => {
-    console.log(req);
     CardsService.getAllCards(req.app.get("db"))
       .then(cards => {
         res.json(cards);
