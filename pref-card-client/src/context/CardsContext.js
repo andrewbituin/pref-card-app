@@ -22,13 +22,19 @@ export class CardsContextProvider extends React.Component {
     clearError = () => {
         this.setState({ error: null })
     }
+    deleteCardFromList = id => {
+        const newCardsList = [...this.state.cardsList]
+        const updatedList = newCardsList.filter(card => card.id !== id)
+        this.setState({ cardsList : updatedList})
+    }
     render() {
         const value = {
             cardsList: this.state.cardsList,
             error: this.state.error,
             setCardsList: this.setCardsList,
             setError: this.setError,
-            clearError: this.clearError
+            clearError: this.clearError,
+            deleteCardFromList: this.deleteCardFromList
         }
         return (
             <CardsContext.Provider value={value}>

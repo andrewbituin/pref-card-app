@@ -46,7 +46,17 @@ authRouter.post("/login", jsonBodyParser, (req, res, next) => {
 });
 
 authRouter.post('/register', jsonBodyParser, (req, res, next) => {
-   // const { user_name, full_name, position, password, }
+    
+    for (const field of ['user_name', 'full_name', 'position', 'password']){
+        if (!req.body[field]){
+            return res.status(400).json({
+                error: `Missing '${field} in request body`
+            })
+        }
+    }
+    const { password } = req.body
+    const passwordError = AuthService.validatePassword(password)
+    res.send('User registered')
 })
 
 authRouter

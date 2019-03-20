@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import CardsContext from "../context/CardsContext";
 import LogoutButton from "./LogoutButton";
+import DeleteButton from "./DeleteButton";
 
 export default class CardById extends React.Component {
   static contextType = CardsContext;
@@ -48,6 +49,7 @@ export default class CardById extends React.Component {
         <LogoutButton />
         {this.allCardsButton()}
         {this.findById()}
+        <DeleteButton url={this.props.match.url}/>
       </div>
     );
   }

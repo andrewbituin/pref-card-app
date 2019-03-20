@@ -47,7 +47,7 @@ cardsRouter
     surgeon,
     procedure,
     position,
-    glove_size,
+    glove_size: parseInt(glove_size),
     glove_type,
     dominant_hand,
     equipment,
@@ -59,7 +59,6 @@ cardsRouter
     medications,
     user_id
   }
-  console.log(req.body)
   for (const [key, value] of Object.entries(newCard))
   if (value == null)
     return res.status(400).json({
@@ -79,11 +78,9 @@ cardsRouter
 
 });
 cardsRouter
-    // Best way to patch? How do I patch individual properties in the db?
     .route('/:id')
     .patch(requireAuth, jsonBodyParser, (req, res, next) => {
         const {
-            id,
             surgeon,
             procedure,
             position,
@@ -99,6 +96,34 @@ cardsRouter
             medications,
             user_id
           } = req.body;
-    })
+          const updatedObj = {
+            surgeon,
+            procedure,
+            position,
+            glove_size,
+            glove_type,
+            dominant_hand,
+            equipment,
+            supplies,
+            instrumentation,
+            suture_and_usage,
+            dressings,
+            skin_prep,
+            medications,
+            user_id
+          }
+          CardsService.updateCards(req.app.get('db'), req.params.id, updatedObj)
+          .then(card => {
+            res
+                .status(200)
+                .json(card)
+        })
 
+    })
+cardsRouter
+    .route('/:id')
+    .delete(requireAuth, (req, res, next) => {
+      CardsService.deleteCard(req.app.get('db'), req.params.id)
+      .then(() => res.status(200).send('deleted'))
+    })
 module.exports = cardsRouter;

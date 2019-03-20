@@ -36,6 +36,16 @@ const ApiService = {
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   },
-
+  deleteCard(id) {
+    return fetch(`${config.API_ENDPOINT}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${TokenService.getAuthToken()}`
+      }
+    }).then(res =>
+      console.log(res)
+    );
+  }
 };
 export default ApiService;

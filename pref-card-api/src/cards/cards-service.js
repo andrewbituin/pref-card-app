@@ -15,6 +15,20 @@ const CardsService = {
       .returning("*")
       .then(([card]) => card)
       .then(card => CardsService.getCardById(db, card.id));
+  },
+  updateCards(db, id, updatedCard) {
+    return db("prefcard_cards")
+      .update(updatedCard)
+      .where("id", id)
+      .returning("*")
+      .then(([card]) => card)
+      .then(card => CardsService.getCardById(db, card.id));
+  },
+  deleteCard(db, id) {
+    return db("prefcard_cards")
+      .where("id", id)
+      .del()
+      .returning("*");
   }
 };
 module.exports = CardsService;
