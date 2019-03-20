@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ApiService from "../services/api-service";
+import CardsContext from "../context/CardsContext";
 
 export default class AddCardForm extends React.Component {
+  static contextType = CardsContext
   handleSubmit = e => {
     e.preventDefault();
     const obj = {};
@@ -22,6 +24,7 @@ export default class AddCardForm extends React.Component {
         obj.user_id = user.id;
         ApiService.postCard(JSON.stringify(obj));
       })
+      .then(this.context.addCard(obj))
       .then(() => this.props.history.push('/all'))
   };
 

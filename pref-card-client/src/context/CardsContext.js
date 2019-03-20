@@ -27,6 +27,9 @@ export class CardsContextProvider extends React.Component {
         const updatedList = newCardsList.filter(card => card.id !== id)
         this.setState({ cardsList : updatedList})
     }
+    addCard = card => {
+        this.setState([...this.state.cardsList, card])
+    }
     render() {
         const value = {
             cardsList: this.state.cardsList,
@@ -34,7 +37,8 @@ export class CardsContextProvider extends React.Component {
             setCardsList: this.setCardsList,
             setError: this.setError,
             clearError: this.clearError,
-            deleteCardFromList: this.deleteCardFromList
+            deleteCardFromList: this.deleteCardFromList,
+            addCard: this.addCard
         }
         return (
             <CardsContext.Provider value={value}>
