@@ -14,6 +14,16 @@ const AuthService = {
       .first();
   },
   // Need a getUserIdWithUserName
+  getUserById(db, id){
+    return db("prefcard_users")
+      .where({ id })
+      .first();
+  },
+
+  getAllUsers(db){
+    return db('prefcard_users')
+      .select('*')
+  },
   comparePasswords(password, hash) {
     return bcrypt.compare(password, hash);
   },

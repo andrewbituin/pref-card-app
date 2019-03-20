@@ -7,7 +7,7 @@ const cardsRouter = express.Router();
 
 cardsRouter
   .route("/all")
-  // .all(requireAuth)
+  .all(requireAuth)
   .get((req, res, next) => {
     CardsService.getAllCards(req.app.get("db"))
       .then(cards => {
@@ -17,7 +17,7 @@ cardsRouter
   });
 cardsRouter
   .route("/:id")
-  // .all(requireAuth)
+  .all(requireAuth)
   .get((req, res, next) => {
     console.log(req.params.id);
     CardsService.getCardById(req.app.get("db"), req.params.id).then(data =>
@@ -65,7 +65,7 @@ cardsRouter
     return res.status(400).json({
       error: `Missing '${key}' in request body`
     })
-    newCard.user_id = req.user.id
+    // newCard.user_id = req.user.id
 
     CardsService.insertCard(
         req.app.get('db'),

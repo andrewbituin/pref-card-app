@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config')
 const cardsRouter = require('./cards/cards-router')
 const authRouter = require('./auth/auth-router')
-const usersRouter = require('./users/users-router')
+
 
 const app = express();
 

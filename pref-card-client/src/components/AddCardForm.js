@@ -1,24 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ApiService from '../services/api-service';
+import ApiService from "../services/api-service";
 
 export default class AddCardForm extends React.Component {
-
-  handleChange = e => {
-    const stateProperty = e.target.className;
-    this.setState({ [stateProperty]: e.target.value });
-  };
-
   handleSubmit = e => {
     e.preventDefault();
     const obj = {};
-    const form = new FormData(e.target)
+    const form = new FormData(e.target);
     form.forEach((val, key) => (obj[key] = val));
-    console.log(obj)
-    ApiService.postCard(JSON.stringify(obj))
-      .then(res => console.log(res))
-    // console.log(JSON.stringify(obj))
-    // this.props.history.push("/card/1");
+
+    ApiService.getAllUsers()
+      .then(users => users.find(user => user.full_name === obj.surgeon))
+      .then(user => {
+        if (!user) {
+          throw new Error("User does not exist");
+        } else {
+          return user;
+        }
+      })
+      .then(user => {
+        obj.user_id = user.id;
+        ApiService.postCard(JSON.stringify(obj));
+      })
+      .then(this.props.history.push('/all'))
   };
 
   generateForm = () => {
@@ -26,29 +30,15 @@ export default class AddCardForm extends React.Component {
       <form onSubmit={e => this.handleSubmit(e)}>
         Surgeon:
         <br />
-        <input
-          type="text"
-          className="surgeon"
-          name="surgeon"
-        />
+        <input type="text" className="surgeon" name="surgeon" />
         <br />
         Procedure:
         <br />
-        <textarea
-          rows="4"
-          cols="50"
-          className="procedure"
-          name="procedure"
-        />
+        <textarea rows="4" cols="50" className="procedure" name="procedure" />
         <br />
         Position:
         <br />
-        <textarea
-          rows="4"
-          cols="50"
-          className="position"
-          name="position"
-        />
+        <textarea rows="4" cols="50" className="position" name="position" />
         <br />
         <select className="gloveSize" name="glove_size">
           <option>Glove Size</option>
@@ -88,31 +78,33 @@ export default class AddCardForm extends React.Component {
           />
           <br />
         </label>
-          <label>
-            Dominant Hand: <s />
-            <label htmlFor="right">Right</label>
-            <input type="radio" id="right" className="dominantHand" name="dominant_hand" value="right"  />
-            <label htmlFor="left">Left</label>
-            <input type="radio" id="left" className="dominantHand" name="dominant_hand" value="left"  />
-            <br />
-          </label>
+        <label>
+          Dominant Hand: <s />
+          <label htmlFor="right">Right</label>
+          <input
+            type="radio"
+            id="right"
+            className="dominantHand"
+            name="dominant_hand"
+            value="right"
+          />
+          <label htmlFor="left">Left</label>
+          <input
+            type="radio"
+            id="left"
+            className="dominantHand"
+            name="dominant_hand"
+            value="left"
+          />
+          <br />
+        </label>
         Equipment:
         <br />
-        <textarea
-          rows="4"
-          cols="50"
-          className="equipment"
-          name="equipment"
-        />
+        <textarea rows="4" cols="50" className="equipment" name="equipment" />
         <br />
         Supplies:
         <br />
-        <textarea
-          rows="4"
-          cols="50"
-          className="supplies"
-          name="supplies"
-        />
+        <textarea rows="4" cols="50" className="supplies" name="supplies" />
         <br />
         Instrumentation:
         <br />
@@ -134,21 +126,11 @@ export default class AddCardForm extends React.Component {
         <br />
         Dressings:
         <br />
-        <textarea
-          rows="4"
-          cols="50"
-          className="dressings"
-          name="dressings"
-        />
+        <textarea rows="4" cols="50" className="dressings" name="dressings" />
         <br />
         Skin Prep:
         <br />
-        <textarea
-          rows="4"
-          cols="50"
-          className="skinPrep"
-          name="skin_prep"
-        />
+        <textarea rows="4" cols="50" className="skinPrep" name="skin_prep" />
         <br />
         Medication:
         <br />
