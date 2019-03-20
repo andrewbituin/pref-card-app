@@ -3,6 +3,7 @@ const AuthService = require("./auth-service");
 const { requireAuth } = require("../middleware/jwt-auth");
 const authRouter = express.Router();
 const jsonBodyParser = express.json();
+const path = require("path");
 
 authRouter.post("/login", jsonBodyParser, (req, res, next) => {
   const { user_name, password } = req.body;
@@ -45,19 +46,37 @@ authRouter.post("/login", jsonBodyParser, (req, res, next) => {
     .catch(next);
 });
 
-authRouter.post('/register', jsonBodyParser, (req, res, next) => {
-    
-    for (const field of ['user_name', 'full_name', 'position', 'password']){
-        if (!req.body[field]){
-            return res.status(400).json({
-                error: `Missing '${field} in request body`
-            })
-        }
+authRouter.post("/register", jsonBodyParser, (req, res, next) => {
+  for (const field of ["user_name", "full_name", "position", "password"]) {
+    if (!req.body[field]) {
+      return res.status(400).json({
+        error: `Missing '${field} in request body`
+      });
     }
-    const { password } = req.body
-    const passwordError = AuthService.validatePassword(password)
-    res.send('User registered')
-})
+  }
+  const { full_name, user_name, position, password } = req.body;
+  const passwordError = AuthService.validatePassword(password);
+  if (passwordError) {
+    return res.status(400).json({ error: passwordError });
+  }
+  // Add check for username already in db
+  return AuthService.hashPassword(password).then(hashedPassword => {
+    const newUser = {
+      user_name,
+      password: hashedPassword,
+      full_name,
+      position
+    };
+
+    console.log(newUser);
+    return AuthService.insertUser(req.app.get("db"), newUser).then(user => {
+      res
+        .status(201)
+        .location(path.posix.join(req.originalUrl, `/${user.id}`))
+        .json(AuthService.serializeUser(user));
+    });
+  });
+});
 
 authRouter
   .route("/users")

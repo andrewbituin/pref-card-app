@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("../config");
+const xss = require("xss");
 
 const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
 const AuthService = {
@@ -38,6 +39,13 @@ const AuthService = {
       algorithms: ["HS256"]
     });
   },
+  insertUser(db, newUser) {
+    return db
+      .insert(newUser)
+      .into("prefcard_users")
+      .returning("*")
+      .then(([user]) => user);
+  },
   validatePassword(password) {
     if (password.length < 8) {
       return "Password must be longer than 8 characters";
@@ -52,6 +60,17 @@ const AuthService = {
       return "Password must contain 1 upper case, lower case, number and special character";
     }
     return null;
+  },
+  hashPassword(password) {
+    return bcrypt.hash(password, 12)
+  },
+  serializeUser(user) {
+    return {
+      id: user.id,
+      full_name: xss(user.full_name),
+      user_name: xss(user.user_name),
+      date_create: new Date(user.date_created)
+    };
   }
 };
 
