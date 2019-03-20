@@ -8,6 +8,18 @@ const ApiService = {
     }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
+  },
+  postCard(newCard) {
+    return fetch(`${config.API_ENDPOINT}/create-card`, {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      },
+      body: newCard
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
   }
 };
 export default ApiService;

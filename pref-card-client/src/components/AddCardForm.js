@@ -1,22 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ApiService from '../services/api-service';
 
 export default class AddCardForm extends React.Component {
-  state = {
-    surgeon: "",
-    procedure: "",
-    position: "",
-    gloveSize: null,
-    gloveType: "",
-    dominantHand: "",
-    equipment: "",
-    supplies: "",
-    instrumentation: "",
-    sutureAndUsage: "",
-    dressings: "",
-    skinPrep: "",
-    medications: ""
-  };
 
   handleChange = e => {
     const stateProperty = e.target.className;
@@ -25,8 +11,14 @@ export default class AddCardForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
-    this.props.history.push("/card/1");
+    const obj = {};
+    const form = new FormData(e.target)
+    form.forEach((val, key) => (obj[key] = val));
+    console.log(obj)
+    ApiService.postCard(JSON.stringify(obj))
+      .then(res => console.log(res))
+    // console.log(JSON.stringify(obj))
+    // this.props.history.push("/card/1");
   };
 
   generateForm = () => {
@@ -38,7 +30,6 @@ export default class AddCardForm extends React.Component {
           type="text"
           className="surgeon"
           name="surgeon"
-          onChange={e => this.handleChange(e)}
         />
         <br />
         Procedure:
@@ -47,7 +38,7 @@ export default class AddCardForm extends React.Component {
           rows="4"
           cols="50"
           className="procedure"
-          onChange={e => this.handleChange(e)}
+          name="procedure"
         />
         <br />
         Position:
@@ -56,10 +47,10 @@ export default class AddCardForm extends React.Component {
           rows="4"
           cols="50"
           className="position"
-          onChange={e => this.handleChange(e)}
+          name="position"
         />
         <br />
-        <select className="gloveSize" onChange={e => this.handleChange(e)}>
+        <select className="gloveSize" name="glove_size">
           <option>Glove Size</option>
           <option>6</option>
           <option>6.5</option>
@@ -76,36 +67,33 @@ export default class AddCardForm extends React.Component {
             type="radio"
             id="small"
             className="gloveType"
-            name="gloveType"
             value="small"
-            onChange={e => this.handleChange(e)}
+            name="glove_type"
           />
           <label htmlFor="medium">Medium</label>
           <input
             type="radio"
             id="medium"
             className="gloveType"
-            name="gloveType"
+            name="glove_type"
             value="medium"
-            onChange={e => this.handleChange(e)}
           />
           <label htmlFor="large">Large</label>
           <input
             type="radio"
             id="large"
             className="gloveType"
-            name="gloveType"
+            name="glove_type"
             value="large"
-            onChange={e => this.handleChange(e)}
           />
           <br />
         </label>
           <label>
             Dominant Hand: <s />
             <label htmlFor="right">Right</label>
-            <input type="radio" id="right" className="dominantHand" name="dominantHand" value="right" onChange={e => this.handleChange(e)} />
+            <input type="radio" id="right" className="dominantHand" name="dominant_hand" value="right"  />
             <label htmlFor="left">Left</label>
-            <input type="radio" id="left" className="dominantHand" name="dominantHand" value="left" onChange={e => this.handleChange(e)} />
+            <input type="radio" id="left" className="dominantHand" name="dominant_hand" value="left"  />
             <br />
           </label>
         Equipment:
@@ -114,7 +102,7 @@ export default class AddCardForm extends React.Component {
           rows="4"
           cols="50"
           className="equipment"
-          onChange={e => this.handleChange(e)}
+          name="equipment"
         />
         <br />
         Supplies:
@@ -123,7 +111,7 @@ export default class AddCardForm extends React.Component {
           rows="4"
           cols="50"
           className="supplies"
-          onChange={e => this.handleChange(e)}
+          name="supplies"
         />
         <br />
         Instrumentation:
@@ -132,7 +120,7 @@ export default class AddCardForm extends React.Component {
           rows="4"
           cols="50"
           className="instrumentation"
-          onChange={e => this.handleChange(e)}
+          name="instrumentation"
         />
         <br />
         Suture and usage:
@@ -141,7 +129,7 @@ export default class AddCardForm extends React.Component {
           rows="4"
           cols="50"
           className="sutureAndUsage"
-          onChange={e => this.handleChange(e)}
+          name="suture_and_usage"
         />
         <br />
         Dressings:
@@ -150,7 +138,7 @@ export default class AddCardForm extends React.Component {
           rows="4"
           cols="50"
           className="dressings"
-          onChange={e => this.handleChange(e)}
+          name="dressings"
         />
         <br />
         Skin Prep:
@@ -159,7 +147,7 @@ export default class AddCardForm extends React.Component {
           rows="4"
           cols="50"
           className="skinPrep"
-          onChange={e => this.handleChange(e)}
+          name="skin_prep"
         />
         <br />
         Medication:
@@ -168,7 +156,7 @@ export default class AddCardForm extends React.Component {
           rows="4"
           cols="50"
           className="medications"
-          onChange={e => this.handleChange(e)}
+          name="medications"
         />
         <br />
         <button type="submit">Submit</button>
