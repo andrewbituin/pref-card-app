@@ -7,6 +7,8 @@ export default class CardsCondensedList extends React.Component {
     componentDidMount(){
         ApiService.getAllCards()
             .then(list => this.context.setCardsList(list))
+        ApiService.getAllUsers()
+            .then(list => this.context.setUsersList(list))
     }
     handleCardClick = (e) => {
         this.props.history.push(`/card/${e.target.getAttribute('id')}`)

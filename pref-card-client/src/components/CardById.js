@@ -49,7 +49,7 @@ export default class CardById extends React.Component {
         <LogoutButton />
         {this.allCardsButton()}
         {this.findById()}
-        <DeleteButton url={this.props.match.url}/>
+        <DeleteButton {...this.props} url={this.props.match.url}/>
       </div>
     );
   }

@@ -23,7 +23,7 @@ const AuthService = {
   },
 
   getAllUsers(db) {
-    return db("prefcard_users").select("*");
+    return db("prefcard_users").select("id", 'user_name', 'full_name', 'position');
   },
   comparePasswords(password, hash) {
     return bcrypt.compare(password, hash);

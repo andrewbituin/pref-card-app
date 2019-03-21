@@ -10,30 +10,50 @@ export default class AddCardForm extends React.Component {
     const obj = {};
     const form = new FormData(e.target);
     form.forEach((val, key) => (obj[key] = val));
-
-    ApiService.getAllUsers()
-      .then(users => users.find(user => user.full_name === obj.surgeon))
-      .then(user => {
-        if (!user) {
-          throw new Error("User does not exist");
-        } else {
-          return user;
-        }
-      })
-      .then(user => {
-        obj.user_id = user.id;
-        ApiService.postCard(JSON.stringify(obj));
-      })
+ 
+    const user = this.context.usersList.find(user => user.full_name === obj.surgeon)
+    console.log(user)
+    obj.user_id = user.id
+    console.log(obj)
+    ApiService.postCard(JSON.stringify(obj))
       .then(this.context.addCard(obj))
       .then(() => this.props.history.push('/all'))
+
+    // ApiService.getAllUsers()
+    //   .then(users => {
+    //     users.find(user => user.full_name === obj.surgeon
+    //       )})
+    //   .then(user => {
+    //     console.log(user)
+    //     if (!user) {
+    //       throw new Error("User does not exist");
+    //     } else {
+    //       return user;
+    //     }
+    //   })
+    //   .then(user => {
+    //     obj.user_id = user.id;
+    //     ApiService.postCard(JSON.stringify(obj));
+    //   })
+    //   .then(this.context.addCard(obj))
+    //   .then(() => this.props.history.push('/all'))
   };
 
+  generateOptions = () => {
+    const surgeons = this.context.usersList.filter(user => user.position === 'doctor')
+    return surgeons.map(surgeon => {
+      return (
+        <option key={surgeon.id}>{surgeon.full_name}</option>
+      )
+    })
+  }
   generateForm = () => {
     return (
       <form onSubmit={e => this.handleSubmit(e)}>
         Surgeon:
-        <br />
-        <input type="text" className="surgeon" name="surgeon" />
+        <select className="surgeon" name="surgeon">
+          {this.generateOptions()}
+        </select>
         <br />
         Procedure:
         <br />
