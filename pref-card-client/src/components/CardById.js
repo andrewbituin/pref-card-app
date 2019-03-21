@@ -20,9 +20,12 @@ export default class CardById extends React.Component {
     return this.generateCard(cardById);
   };
   generateCard = card => {
+    if(!card){
+      return <></>
+    } else {
     return (
       <div id={card.id}>
-        <h1>Your PrefCard</h1>
+        <h1>PrefCard</h1>
         <h2>Surgeon: {card.surgeon} </h2>
         <h3>Procedure: {card.procedure} </h3>
         <section>
@@ -41,13 +44,13 @@ export default class CardById extends React.Component {
           <p>Medication: {card.medications} </p>
         </section>
       </div>
-    );
+    )};
   };
   render() {
     return (
       <div>
-        <LogoutButton />
         {this.allCardsButton()}
+        <LogoutButton />
         {this.findById()}
         <DeleteButton {...this.props} url={this.props.match.url}/>
       </div>

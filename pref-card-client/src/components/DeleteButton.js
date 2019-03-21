@@ -1,6 +1,5 @@
 import React from "react";
 import ApiService from "../services/api-service";
-import { Link } from "react-router-dom";
 import CardsContext from "../context/CardsContext";
 
 export default class DeleteButton extends React.Component {
