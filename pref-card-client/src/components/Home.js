@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import './Home.css';
 
 export default function Home() {
   return (
@@ -22,8 +23,10 @@ export default function Home() {
         </Link>
       </nav>
       <main>
-        <h1>PrefCards</h1>
-        <h2>Reliable. Accessible. Accurate.</h2>
+        <header className="home-header">
+          <h1 className="home-title">PrefCards</h1>
+          <h2 className="home-subtitle">Reliable. Accessible. Accurate.</h2>
+        </header>
         <section className="about-section ">
           <h3>Experience simplicity and usablity.</h3>
           <p>

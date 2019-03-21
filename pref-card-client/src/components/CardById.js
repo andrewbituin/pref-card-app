@@ -13,38 +13,46 @@ export default class CardById extends React.Component {
       </Link>
     );
   };
-
   findById = () => {
     const id = parseInt(this.props.match.url.split("/").slice(2));
     const cardById = this.context.cardsList.find(card => card.id === id);
     return this.generateCard(cardById);
   };
   generateCard = card => {
-    if(!card){
-      return <></>
+    if (!card) {
+      return <></>;
     } else {
+      return (
+        <div id={card.id}>
+          <h1>PrefCard</h1>
+          <h2>Surgeon: {card.surgeon} </h2>
+          <h3>Procedure: {card.procedure} </h3>
+          <section>
+            <p>Position: {card.position} </p>
+            <p>Glove Size: {card.glove_size} </p>
+            <p>Glove Type: {card.glove_type} </p>
+            <p>Domninant Hand: {card.dominant_hand} </p>
+          </section>
+          <section>
+            <p>Equipment: {card.equipment} </p>
+            <p>Supplies: {card.supplies} </p>
+            <p>Instrumentation: {card.instrumentation} </p>
+            <p>Suture and Usage: {card.suture_and_usage} </p>
+            <p>Dressings: {card.dressings} </p>
+            <p>Skin Prep: {card.skin_prep} </p>
+            <p>Medication: {card.medications} </p>
+          </section>
+        </div>
+      );
+    }
+  };
+  editButton = () => {
+    const id = parseInt(this.props.match.url.split("/").slice(2));
     return (
-      <div id={card.id}>
-        <h1>PrefCard</h1>
-        <h2>Surgeon: {card.surgeon} </h2>
-        <h3>Procedure: {card.procedure} </h3>
-        <section>
-          <p>Position: {card.position} </p>
-          <p>Glove Size: {card.glove_size} </p>
-          <p>Glove Type: {card.glove_type} </p>
-          <p>Domninant Hand: {card.dominant_hand} </p>
-        </section>
-        <section>
-          <p>Equipment: {card.equipment} </p>
-          <p>Supplies: {card.supplies} </p>
-          <p>Instrumentation: {card.instrumentation} </p>
-          <p>Suture and Usage: {card.suture_and_usage} </p>
-          <p>Dressings: {card.dressings} </p>
-          <p>Skin Prep: {card.skin_prep} </p>
-          <p>Medication: {card.medications} </p>
-        </section>
-      </div>
-    )};
+      <Link to={`/edit/${id}`}>
+        <button type="click" >Edit Card</button>
+      </Link>
+    );
   };
   render() {
     return (
@@ -52,7 +60,8 @@ export default class CardById extends React.Component {
         {this.allCardsButton()}
         <LogoutButton />
         {this.findById()}
-        <DeleteButton {...this.props} url={this.props.match.url}/>
+        {this.editButton()}
+        <DeleteButton {...this.props} url={this.props.match.url} />
       </div>
     );
   }

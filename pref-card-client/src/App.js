@@ -8,6 +8,7 @@ import CardsList from "./components/CardsList";
 import AddCardForm from "./components/AddCardForm";
 import { CardsContextProvider } from "./context/CardsContext";
 import PrivateRoute from './components/Utils/PrivateRoute';
+import EditForm from "./components/EditForm";
 
 class App extends Component {
   render() {
@@ -35,6 +36,11 @@ class App extends Component {
             exact
             path="/create-card"
             component={AddCardForm}
+          />
+          <PrivateRoute
+            exact
+            path="/edit/:id"
+            component={EditForm}
           />
         </div>
       </CardsContextProvider>

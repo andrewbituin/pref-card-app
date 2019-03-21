@@ -2,9 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ApiService from "../services/api-service";
 import CardsContext from "../context/CardsContext";
+import LogoutButton from "./LogoutButton";
 
 export default class AddCardForm extends React.Component {
   static contextType = CardsContext
+
+  state = {
+    error: false
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     const obj = {};
@@ -12,31 +18,11 @@ export default class AddCardForm extends React.Component {
     form.forEach((val, key) => (obj[key] = val));
  
     const user = this.context.usersList.find(user => user.full_name === obj.surgeon)
-    console.log(user)
     obj.user_id = user.id
-    console.log(obj)
     ApiService.postCard(JSON.stringify(obj))
+      .then(res => console.log(res) )
       .then(this.context.addCard(obj))
       .then(() => this.props.history.push('/all'))
-
-    // ApiService.getAllUsers()
-    //   .then(users => {
-    //     users.find(user => user.full_name === obj.surgeon
-    //       )})
-    //   .then(user => {
-    //     console.log(user)
-    //     if (!user) {
-    //       throw new Error("User does not exist");
-    //     } else {
-    //       return user;
-    //     }
-    //   })
-    //   .then(user => {
-    //     obj.user_id = user.id;
-    //     ApiService.postCard(JSON.stringify(obj));
-    //   })
-    //   .then(this.context.addCard(obj))
-    //   .then(() => this.props.history.push('/all'))
   };
 
   generateOptions = () => {
@@ -57,14 +43,14 @@ export default class AddCardForm extends React.Component {
         <br />
         Procedure:
         <br />
-        <textarea rows="4" cols="50" className="procedure" name="procedure" />
+        <textarea rows="4" cols="50" className="procedure" name="procedure"/>
         <br />
         Position:
         <br />
         <textarea rows="4" cols="50" className="position" name="position" />
         <br />
+        Glove Size:
         <select className="gloveSize" name="glove_size">
-          <option>Glove Size</option>
           <option>6</option>
           <option>6.5</option>
           <option>7</option>
@@ -82,6 +68,7 @@ export default class AddCardForm extends React.Component {
             className="gloveType"
             value="small"
             name="glove_type"
+            defaultChecked
           />
           <label htmlFor="medium">Medium</label>
           <input
@@ -110,6 +97,7 @@ export default class AddCardForm extends React.Component {
             className="dominantHand"
             name="dominant_hand"
             value="right"
+            defaultChecked
           />
           <label htmlFor="left">Left</label>
           <input
@@ -175,9 +163,7 @@ export default class AddCardForm extends React.Component {
         <Link to="/all">
           <button type="click">Cancel</button>
         </Link>
-        <Link to="/">
-          <button type="click">Log Out</button>
-        </Link>
+        <LogoutButton />
         <header>
           <h1>New PrefCard</h1>
         </header>
