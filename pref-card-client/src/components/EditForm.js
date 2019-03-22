@@ -6,9 +6,13 @@ import ApiService from "../services/api-service";
 
 export default class EditForm extends React.Component {
   static contextType = CardsContext;
-  state = {
-    cardById: {}
-  };
+
+  componentDidMount() {
+    const id = parseInt(this.props.match.url.split("/").slice(2));
+    ApiService.getCardById(id)
+      .then(res => this.context.addToEditCard(res))
+  }
+
   findCardById = () => {
     const id = parseInt(this.props.match.url.split("/").slice(2));
     const cardById = this.context.cardsList.find(card => card.id === id);
@@ -16,19 +20,23 @@ export default class EditForm extends React.Component {
   };
   handleSubmit = e => {
     e.preventDefault();
+    // Grabbing all inputs from the form
     const obj = {};
     const form = new FormData(e.target);
     form.forEach((val, key) => (obj[key] = val));
+
+    // Getting id off of url and finding the user based on context usersList
     const id = parseInt(this.props.match.url.split("/").slice(2));
     const user = this.context.usersList.find(
       user => user.full_name === obj.surgeon
     );
+    // Assigning user_id to obj from form based on usersList in context
     obj.user_id = user.id;
     obj.id = id;
     ApiService.updateCard(obj.id, JSON.stringify(obj))
-      .then(this.context.addCard(obj))
+      .then(this.context.updateCard(id, obj))
       .then(() => {
-        this.props.history.push(`/all`);
+        this.props.history.push(`/card/${id}`);
       });
   };
   generateOptions = () => {
@@ -258,6 +266,7 @@ export default class EditForm extends React.Component {
     );
   };
   render() {
+    console.log(this.context);
     return (
       <div>
         <Link to="/all">

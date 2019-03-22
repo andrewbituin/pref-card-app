@@ -10,7 +10,8 @@ const CardsContext = React.createContext({
   setUsersList: () => {},
   setError: () => {},
   clearError: () => {},
-  deleteCardFromList: () => {}
+  deleteCardFromList: () => {},
+  updateCard: () => {}
 });
 
 export default CardsContext;
@@ -43,6 +44,17 @@ export class CardsContextProvider extends React.Component {
   addCard = card => {
     this.setState([...this.state.cardsList, card]);
   };
+  updateCard = (id, card) => {
+    console.log(id, card)
+    const allCards = [...this.state.cardsList]
+    for(let i = 0; i < allCards.length; i++){
+      if(allCards[i].id === id){
+        allCards[i] = card;
+        break
+      }
+    }
+    this.setState({ cardsList: allCards})
+  }
   addToEditCard = (editCard) => {
     this.setState({ editCard })
   }
@@ -57,8 +69,10 @@ export class CardsContextProvider extends React.Component {
       deleteCardFromList: this.deleteCardFromList,
       addCard: this.addCard,
       setUsersList: this.setUsersList,
+
       addToEditCard: this.addToEditCard,
-      editCard: this.editCard
+      editCard: this.editCard,
+      updateCard: this.updateCard
     };
     return (
       <CardsContext.Provider value={value}>
