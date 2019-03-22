@@ -47,14 +47,24 @@ authRouter.post("/login", jsonBodyParser, (req, res, next) => {
 });
 
 authRouter.post("/register", jsonBodyParser, (req, res, next) => {
+  const { full_name, user_name, position, password } = req.body;
   for (const field of ["user_name", "full_name", "position", "password"]) {
     if (!req.body[field]) {
       return res.status(400).json({
-        error: `Missing '${field} in request body`
+        error: `Missing '${field}' in request body`
       });
     }
   }
-  const { full_name, user_name, position, password } = req.body;
+
+  AuthService.hasUserWithUserName(
+    req.app.get('db'),
+    user_name
+  )
+    .then(hasUserWithUserName => {
+      if (hasUserWithUserName)
+        return res.status(400).json({ error: 'Username already exists'})
+    })
+
   const passwordError = AuthService.validatePassword(password);
   if (passwordError) {
     return res.status(400).json({ error: passwordError });
@@ -68,7 +78,7 @@ authRouter.post("/register", jsonBodyParser, (req, res, next) => {
       position
     };
 
-    console.log(newUser);
+
     return AuthService.insertUser(req.app.get("db"), newUser).then(user => {
       res
         .status(201)

@@ -2,6 +2,7 @@ import React from "react";
 import LogoutButton from "./LogoutButton";
 import { Link } from "react-router-dom";
 import CardsContext from "../context/CardsContext";
+import ApiService from "../services/api-service";
 
 export default class EditForm extends React.Component {
   static contextType = CardsContext;
@@ -13,11 +14,37 @@ export default class EditForm extends React.Component {
     const cardById = this.context.cardsList.find(card => card.id === id);
     return this.generateForm(cardById);
   };
-  // Need to populate select dropdowns with default values. Through ternary?
+  handleSubmit = e => {
+    e.preventDefault();
+    const obj = {};
+    const form = new FormData(e.target);
+    form.forEach((val, key) => (obj[key] = val));
+    const id = parseInt(this.props.match.url.split("/").slice(2));
+    const user = this.context.usersList.find(
+      user => user.full_name === obj.surgeon
+    );
+    obj.user_id = user.id;
+    obj.id = id;
+    ApiService.updateCard(obj.id, JSON.stringify(obj))
+      .then(this.context.addCard(obj))
+      .then(() => {
+        this.props.history.push(`/all`);
+      });
+  };
+  generateOptions = () => {
+    const surgeons = this.context.usersList.filter(
+      user => user.position === "doctor"
+    );
+    return surgeons.map(surgeon => {
+      return <option key={surgeon.id}>{surgeon.full_name}</option>;
+    });
+  };
   generateForm = card => {
     return (
       <form onSubmit={e => this.handleSubmit(e)}>
-        Surgeon: {card.surgeon}
+        <select className="surgeon" name="surgeon" defaultValue={card.surgeon}>
+          {this.generateOptions()}
+        </select>
         <br />
         Procedure:
         <br />

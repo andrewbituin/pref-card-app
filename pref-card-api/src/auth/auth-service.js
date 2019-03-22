@@ -21,7 +21,12 @@ const AuthService = {
       .where({ id })
       .first();
   },
-
+  hasUserWithUserName(db, user_name){
+    return db('prefcard_users')
+      .where({ user_name })
+      .first()
+      .then(user => !!user)
+  },
   getAllUsers(db) {
     return db("prefcard_users").select("id", 'user_name', 'full_name', 'position');
   },

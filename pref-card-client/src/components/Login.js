@@ -15,6 +15,8 @@ export default class Login extends React.Component {
   };
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({ error: null });
+
     AuthApiService.postLogin({
       user_name: this.state.userName,
       password: this.state.password
@@ -28,9 +30,11 @@ export default class Login extends React.Component {
       });
   };
   render() {
+    const { error } = this.state;
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>
+          <div role="alert">{error && <p className="error">{error}</p>}</div>
           <label>User Name: </label>
           <input
             type="text"

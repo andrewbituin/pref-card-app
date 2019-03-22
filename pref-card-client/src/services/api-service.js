@@ -25,6 +25,18 @@ const ApiService = {
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   },
+  updateCard(id, newCard) {
+    return fetch(`${config.API_ENDPOINT}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${TokenService.getAuthToken()}`
+      },
+      body: newCard
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
+  },
   getAllUsers() {
     return fetch(`${config.API_ENDPOINT}/auth/users`, {
       method: "GET",
