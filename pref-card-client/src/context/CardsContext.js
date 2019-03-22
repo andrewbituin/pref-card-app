@@ -4,7 +4,13 @@ const CardsContext = React.createContext({
   usersList: [],
   cardsList: [],
   editCard: {},
-  error: null
+  error: null,
+  addToEditCard: () => {},
+  setCardsList: () => {},
+  setUsersList: () => {},
+  setError: () => {},
+  clearError: () => {},
+  deleteCardFromList: () => {}
 });
 
 export default CardsContext;
@@ -14,7 +20,7 @@ export class CardsContextProvider extends React.Component {
     usersList: [],
     cardsList: [],
     editCard: {},
-    error: null
+    error: null,
   };
   setCardsList = cardsList => {
     this.setState({ cardsList });

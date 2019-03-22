@@ -40,7 +40,7 @@ export default class Login extends React.Component {
           <br />
           <label>Password: </label>
           <input
-            type="text"
+            type="password"
             className="password"
             onChange={e => this.handleLoginChange(e)}
           />
