@@ -1,3 +1,16 @@
+.navigation{
+    margin: 0 auto;
+}
+.login-button, .register-button{
+    border: none;
+    font-size: .75em;
+}
+.login-button{
+    border-right: 1px solid #e6e6e6;
+}
+.login-button:hover, .register-button:hover {
+    color: blue;
+}
 .home-header{
     text-align: center;
 }

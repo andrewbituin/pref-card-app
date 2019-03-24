@@ -265,13 +265,14 @@ export default class EditForm extends React.Component {
       </form>
     );
   };
+  handleCancelButton = () => {
+    this.props.history.goBack()
+  }
   render() {
     console.log(this.context);
     return (
       <div>
-        <Link to="/all">
-          <button type="click">Cancel</button>
-        </Link>
+        <button type="click" onClick={this.handleCancelButton}>Cancel</button>
         <LogoutButton />
         <h1>Edit PrefCard</h1>
         {this.findCardById()}

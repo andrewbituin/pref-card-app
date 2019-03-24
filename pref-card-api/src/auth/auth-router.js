@@ -24,7 +24,7 @@ authRouter.post("/login", jsonBodyParser, (req, res, next) => {
     .then(dbUser => {
       if (!dbUser) {
         return res.status(400).json({
-          error: "Incorrect user_name"
+          error: "Invalid user_name"
         });
       }
       return AuthService.comparePasswords(

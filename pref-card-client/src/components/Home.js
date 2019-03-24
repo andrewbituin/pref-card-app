@@ -5,7 +5,7 @@ import './Home.css';
 export default function Home() {
   return (
     <>
-      <nav>
+      <nav className="navigation">
         <Link to="/login">
           <button type="click" className="login-button">
             Log In
@@ -14,11 +14,6 @@ export default function Home() {
         <Link to="/register">
           <button type="click" className="register-button">
             Register
-          </button>
-        </Link>
-        <Link to="/all">
-          <button type="click" className="all-cards-button">
-            View PrefCards
           </button>
         </Link>
       </nav>
@@ -35,10 +30,9 @@ export default function Home() {
           </p>
           <h3>Work with team focused accessibility.</h3>
           <p>
-            With PrefCards, you can control who is able to edit your preference
-            card. Allow only people you trust to edit your preference card. This
-            ensures consistency across procedures and allows staff to come and
-            go knowing that the equipment and patient information is as it
+            PrefCards allows you limit the users who are able to edit your preference
+            card, ensuring consistency across procedures and allowing staff to come and
+            go knowing that the surgeon's preferences for equipment and patient information is as it
             should be.
           </p>
           <h3>Log in and get started.</h3>
